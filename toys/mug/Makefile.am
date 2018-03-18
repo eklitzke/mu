@@ -19,8 +19,9 @@ include $(top_srcdir)/gtest.mk
 # enforce compiling this dir first before decending into tests/
 SUBDIRS= .
 
-AM_CPPFLAGS=-I${top_srcdir} -I${top_srcdir}/lib $(GTK_CFLAGS) $(WEBKIT_CFLAGS)	\
-	-DICONDIR='"$(icondir)"' -DMUGDIR='"$(abs_srcdir)"'			\
+AM_CPPFLAGS=-I${top_srcdir} -I${top_srcdir}/lib\
+  $(GTK_CFLAGS) $(WEBKITGTK3_CFLAGS) $(WEBKITGTK4_CFLAGS)\
+  -DICONDIR='"$(icondir)"' -DMUGDIR='"$(abs_srcdir)"'			\
 	-DGSEAL_ENABLE
 
 # remove -DGTK_DISABLE_DEPRECATED for now, since it breaks 3.10+ compilation
@@ -86,7 +87,8 @@ libmuwidgets_la_SOURCES=							\
 libmuwidgets_la_LIBADD=								\
 	${top_builddir}/lib/libmu.la						\
 	${GTK_LIBS}								\
-	${WEBKIT_LIBS}								\
+	${WEBKITGTK3_LIBS}								\
+  ${WEBKITGTK4_LIBS}								\
 	${GIO_LIBS}
 
 EXTRA_DIST=									\

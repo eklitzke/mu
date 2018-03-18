@@ -20,7 +20,11 @@
 #ifndef __MU_MSG_BODY_VIEW_H__
 #define __MU_MSG_BODY_VIEW_H__
 
+#if HAVE_WEBKITGTK4
+#include <webkit2/webkit2.h>
+#else
 #include <webkit/webkitwebview.h>
+#endif
 #include <mu-msg.h>
 
 G_BEGIN_DECLS

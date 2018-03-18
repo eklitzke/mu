@@ -17,13 +17,21 @@
 **
 */
 
+#include "config.h"
+
 #include <mu-msg.h>
 #include <mu-date.h>
 #include <mu-msg-part.h>
 
 #include <gtk/gtk.h>
+
+#ifdef HAVE_WEBKITGTK4
+#include <webkit2/webkit2.h>
+#else
 #include <webkit/webkitwebview.h>
 #include <webkit/webkitwebresource.h>
+#endif
+
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>

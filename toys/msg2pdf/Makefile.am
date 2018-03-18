@@ -20,7 +20,7 @@ include $(top_srcdir)/gtest.mk
 SUBDIRS= .
 
 
-AM_CPPFLAGS=-I${top_srcdir}/lib $(GTK_CFLAGS) $(WEBKIT_CFLAGS) -DICONDIR='"$(icondir)"'
+AM_CPPFLAGS=-I${top_srcdir}/lib $(GTK_CFLAGS) $(WEBKITGTK3_CFLAGS) $(WEBKITGTK4_CFLAGS) -DICONDIR='"$(icondir)"'
 
 # don't use -Werror, as it might break on other compilers
 # use -Wno-unused-parameters, because some callbacks may not
@@ -51,4 +51,5 @@ DISTCLEANFILES=						\
 msg2pdf_LDADD=						\
 	${top_builddir}/lib/libmu.la			\
 	$(GTK_LIBS)					\
-	${WEBKIT_LIBS}
+	${WEBKITGTK3_LIBS}  \
+  ${WEBKITGTK4_LIBS}

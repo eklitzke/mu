@@ -194,15 +194,19 @@ AM_CONDITIONAL(HAVE_GTK,[test "x$have_gtk" = "xyes"])
 # webkit? needed for the fancy web widget
 # use --disable-webkit to disable it, even if you have it
 AC_ARG_ENABLE([webkit],AS_HELP_STRING([--disable-webkit],[Disable webkit]))
-AS_IF([test "x$enable_webkit" != "xno"],[
-       PKG_CHECK_MODULES(WEBKIT,webkitgtk-3.0 >= 1.8.0,[have_webkit=yes],[have_webkit=no])
-       AS_IF([test "x$have_webkit" = "xyes"],[
-	    webkit_version="`$PKG_CONFIG --modversion webkitgtk-3.0`"])
-       AC_SUBST(WEBKIT_CFLAGS)
-       AC_SUBST(WEBKIT_LIBS)
-])
-AM_CONDITIONAL(HAVE_WEBKIT, [test "x$have_webkit" = "xyes"])
-AM_CONDITIONAL(BUILD_GUI,[test "x$have_webkit" = "xyes" -a "x$have_gtk" = "xyes"])
+AS_IF([test "x$enable_webkit" != "xno"],
+      [PKG_CHECK_MODULES(WEBKITGTK4,webkit2gtk-4.0 >= 1.9.0,
+                        [webkit_version="`$PKG_CONFIG --modversion webkit2gtk-4.0`";
+                        AC_DEFINE(HAVE_WEBKITGTK4, 1, [Defined when webkit2gtk-3.0 is present.])
+                        AC_SUBST(WEBKITGTK4_CFLAGS)
+                        AC_SUBST(WEBKITGTK4_LIBS)],
+                        [PKG_CHECK_MODULES(WEBKITGTK3,webkitgtk-3.0 >= 1.8.0,
+                                          [webkit_version="`$PKG_CONFIG --modversion webkitgtk-3.0`";
+                                          AC_DEFINE(HAVE_WEBKITGTK3, 1, [Defined when webkitgtk-3.0 is present.])
+                                          AC_SUBST(WEBKITGTK3_CFLAGS)
+                                          AC_SUBST(WEBKITGTK3_LIBS)])])])
+AM_CONDITIONAL(HAVE_WEBKIT, [test x$webkit_version != x])
+AM_CONDITIONAL(BUILD_GUI,[test x$webkit_version != x -a "x$have_gtk" = "xyes"])
 ###############################################################################
 
 

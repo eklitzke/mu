@@ -16,12 +16,17 @@
 ** Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 **
 */
+#include "config.h"
+#if HAVE_WEBKITGTK4
+#include <webkit2/webkit2.h>
+#else
 #include <webkit/webkitwebview.h>
 #include <webkit/webkitnetworkresponse.h>
 #include <webkit/webkitwebnavigationaction.h>
 #include <webkit/webkitwebpolicydecision.h>
 #include "mu-msg-body-view.h"
 #include <mu-msg-part.h>
+#endif
 
 enum _ViewMode {
 	VIEW_MODE_MSG,
