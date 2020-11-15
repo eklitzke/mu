@@ -444,7 +444,7 @@ static const size_t DIRENT_ALLOC_SIZE =
 static struct dirent*
 dirent_new (void)
 {
-	return (struct dirent*) g_new0(guchar, DIRENT_ALLOC_SIZE);
+	return (struct dirent*) g_slice_alloc (DIRENT_ALLOC_SIZE);
 }
 
 
